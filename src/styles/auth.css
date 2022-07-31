@@ -1,0 +1,41 @@
+* {
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+}
+
+.form-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+}
+
+.form-container__info {
+    width: 350px;
+    margin-right: 100px;
+}
+
+.form-container__info h4 {
+    color: #1877f2;
+}
+
+.form-container__form {
+    width: 350px;
+    background-color: #fff;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.form-container__form button {
+    width: 100%;
+    
+
+}
+
+.form-container__form input {
+    margin-bottom: 10px;
+    height: 40px;
+}
