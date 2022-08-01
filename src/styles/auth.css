@@ -17,25 +17,34 @@
     margin-right: 100px;
 }
 
-.form-container__info h4 {
+.form-container__info h1 {
     color: #1877f2;
 }
 
+.form-container__info p {
+    font-size: 18px;
+}
+
 .form-container__form {
-    width: 350px;
+    width: 450px;
     background-color: #fff;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
+    text-align: center;
 }
 
 .form-container__form button {
     width: 100%;
-    
-
+    margin-bottom: 15px;
 }
 
 .form-container__form input {
     margin-bottom: 10px;
-    height: 40px;
+}
+
+.fullname-field {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 12px;
 }
