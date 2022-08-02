@@ -1,0 +1,39 @@
+.navbar-container {
+	display: flex;
+	width: 100%;
+	background-color: #1877f2;
+	padding: 15px;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.nav-icon {
+	color: #fff;
+	margin: 0 20px;
+}
+
+.nav-icon:hover {
+	color: rgb(210, 210, 210)
+}
+
+
+.navbar-container__form {
+	display: flex;
+}
+
+.navbar-container__form input {
+	margin-right: 10px;
+}
+
+.navbar-container__form button {
+	margin-right: 10px;
+}
+
+.logout-button {
+	font-size: 17px;
+
+}
+
+.logout-button i {
+	margin-right: 10px;
+}

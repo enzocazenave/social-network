@@ -1,10 +1,16 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { SocialNetworkRoutes } from '../social_network/routes/SocialNetworkRoutes';
 import { AuthRoutes } from '../auth/routes/AuthRoutes';
+import { CheckingAuth } from '../ui/';
+import { useCheckAuth } from '../hooks/';
 
 export const AppRouter = () => {
 
-    const status = 'non';
+    const status = useCheckAuth();
+    
+    if (status === 'checking') {
+        return <CheckingAuth/>
+    }
 
     return (
         <Routes>

@@ -5,11 +5,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { AppRouter } from './router/AppRouter';
 
 import 'animate.css';
+import { store } from './store';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  //<Provider /** store={ store } */>
+  <Provider store={ store }>
     <BrowserRouter>
       <AppRouter />
     </BrowserRouter>
-  //</Provider>
+  </Provider>
 )
