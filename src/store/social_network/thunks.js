@@ -95,6 +95,7 @@ export const startUploadingNewPost = (title, desc, files = []) => {
         userPosts.push(newPost);
 
         dispatch(setPosts(userPosts));
+        dispatch(setDatabaseUserInfo())
     
         Swal.fire('Publicación subida', '', 'success');
     }
@@ -103,6 +104,7 @@ export const startUploadingNewPost = (title, desc, files = []) => {
 export const setDatabaseUserInfo = () => {
     return async(dispatch, getState) => {
         const { uid, username, photoURL, name, surname } = getState().auth;
+        const { posts } = getState().social_network;
 
         await set(ref(FirebaseRTDB, `users/${uid}`), {
             username: username, photoURL: photoURL, name: `${name} ${surname}`

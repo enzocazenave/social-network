@@ -17,12 +17,16 @@ export const AppRouter = () => {
         <Routes>
             {
                 (status === 'authenticated')
-                ? <Route path="/*" element={ <SocialNetworkRoutes /> } />
+                ? (
+                    <>
+                        <Route path="/*" element={ <SocialNetworkRoutes /> } />
+                        <Route path="profile/:uid" element={<UserProfilePage />} />
+                    </>
+                )
                 : <Route path="/auth/*" element={ <AuthRoutes /> } />
             }
 
             <Route path="/*" element={ <Navigate to='/auth/login' /> } />
-            <Route path="profile/:uid" element={<UserProfilePage />} />
         </Routes>
     )
 }

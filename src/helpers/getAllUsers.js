@@ -9,7 +9,8 @@ export const getAllUsers = async() => {
         if (snapshot.exists()) {   
             const plainResult = snapshot.val();
 
-            const mappedResult = Object.keys(plainResult).map(key => {
+            const mappedResult = Object.keys(plainResult).map((key) => {
+
                 result.push({
                     uid: key,
                     username: plainResult[key]['username'],

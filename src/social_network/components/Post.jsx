@@ -2,8 +2,7 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import '../../styles/social_network/Post.css'
 
-export const Post = ({ title, desc, photoURL: photo_url, date, id }) => {
-
+export const Post = ({ title, desc, photoURL: photo_url, date, id, moreData  }) => {
     const { username, photoURL } = useSelector(state => state.auth);
 
     const dateString = useMemo(() => {
@@ -15,7 +14,7 @@ export const Post = ({ title, desc, photoURL: photo_url, date, id }) => {
     return (
         <>
             <div className="post-account">
-                <img className="container__small-photo" src={ photoURL }/>@<strong>{ username }</strong>
+                <img className="container__small-photo" src={ (moreData) ? moreData[0] : photoURL }/>@<strong>{  (moreData) ? moreData[1] : username }</strong>
                 <p className="container__published-text">El {dateString}.</p>
             </div>
 
@@ -30,8 +29,6 @@ export const Post = ({ title, desc, photoURL: photo_url, date, id }) => {
                 <div className="post-buttons">
                     <button className="btn btn-outline-success me-3" ><i className="bi bi-heart-fill"></i></button>
                     <button className="btn btn-outline-secondary" ><i className="bi bi-chat-text-fill"></i></button>
-                    
-
                 </div>
             </div>
             

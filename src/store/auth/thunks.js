@@ -76,7 +76,7 @@ export const startCreatingUserWithEmailPassword = ({ email, password, username, 
 
         dispatch(setPosts([user_post]));
 
-        dispatch(login({ uid, email, name, surname, username, photoURL: "https://d500.epimg.net/cincodias/imagenes/2016/07/04/lifestyle/1467646262_522853_1467646344_noticia_normal.jpg", created_time: date }, {merge: true}));
+        await dispatch(login({ uid, email, name, surname, username, photoURL: "https://d500.epimg.net/cincodias/imagenes/2016/07/04/lifestyle/1467646262_522853_1467646344_noticia_normal.jpg", created_time: date }, {merge: true}));
         
         await dispatch(setDatabaseUserInfo());
     }

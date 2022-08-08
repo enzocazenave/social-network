@@ -9,6 +9,7 @@
     border-left: 2px solid #000;
     padding-left: 15px;
     padding-right: 15px;
+    overflow: hidden;
 }
 
 .container__small-photo {
@@ -28,9 +29,11 @@
 
 .post-body__image {
     display: block;
-    width: 600px;
-    height: 500px;
+    width: 500px;
+    height: 400px;
     object-fit: cover;
     border-radius: 15px;
     margin-bottom: 10px;
 }
+
+

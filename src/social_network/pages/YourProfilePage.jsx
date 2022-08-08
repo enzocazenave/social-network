@@ -5,6 +5,7 @@ import { useMemo, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { startUploadingProfileImage, startUploadingNewInfo, startUploadingNewPost } from '../../store/social_network/';
 import { useForm } from '../../hooks/useForm';
+import { fileCheck } from '../../helpers/fileCheck';
 
 const initialFormInfo = {
     location: '',
@@ -40,9 +41,12 @@ export const YourProfilePage = () => {
     const fileInputRef = useRef();
 
     const onFileInputChange = ({ target }) => {
-        if (target.files == 0) return;
+        if (target.files === 0) return;
+        const checkedFiles = fileCheck(target);
+        if (checkedFiles.length === 0) return;
+        console.log(checkedFiles)
 
-        dispatch(startUploadingProfileImage(target.files));
+        dispatch(startUploadingProfileImage(checkedFiles));
     }
 
     const dateString = useMemo(() => {
@@ -95,10 +99,8 @@ export const YourProfilePage = () => {
 
     const onPublishInputFileChange = ({ target }) => {
         if (target.files == 0) return;
-
-        for (const photo of target.files) {
-            post_files.push(photo);
-        }
+        post_files = fileCheck(target);
+        if (post_files.length === 0) return;
     }
 
     const onPublishPost = () => {

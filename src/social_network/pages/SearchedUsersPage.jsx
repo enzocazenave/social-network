@@ -7,7 +7,8 @@ import { NavBar } from '../components';
 export const SearchedUsersPage = () => {
 
     const { searchedUsers: users } = useSelector(state => state.social_network);
-
+    const { uid } = useSelector(state => state.auth);
+    
     return (
         <>
         <NavBar />
@@ -20,7 +21,7 @@ export const SearchedUsersPage = () => {
                     (users.length > 0)
                     ?   users.map(user  => {
                             return( 
-                                <Link to={`/profile/${user.uid}`} key={ user.uid } className="user animate__animated animate__fadeInLeft">
+                                <Link to={`/profile/${user.uid}`} key={ user.uid } className="user animate__animated animate__fadeIn">
                                     <div className="user-container">
                                         <img className="user-image" src={ user.photoURL } />
                                         <div className="user-info">
