@@ -27,7 +27,7 @@ export const registerUserWithEmailPassword = async({ email, password, username, 
     try {
         const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
         const { uid, photoURL } = resp.user;
-
+        
         return {
             ok: true,
             uid,

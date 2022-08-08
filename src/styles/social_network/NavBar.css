@@ -1,10 +1,13 @@
 .navbar-container {
+	position: fixed;
+	top: 0;
 	display: flex;
 	width: 100%;
 	background-color: #1877f2;
-	padding: 15px;
+	padding: 5px;
 	justify-content: space-between;
 	align-items: center;
+	z-index: 100;
 }
 
 .nav-icon {
@@ -36,4 +39,17 @@
 
 .logout-button i {
 	margin-right: 10px;
+}
+
+.search-container {
+	width: 100%;
+	margin-top: 100;
+}
+
+.search-container-image {
+	width: 25px;
+	height: 25px;
+	object-fit: cover;
+	border-radius: 100%;
+	margin-right: 15px;
 }

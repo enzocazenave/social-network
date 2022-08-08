@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import { useForm } from '../../hooks/';
 import '../../styles/auth/auth.css';
-
 import { startLoginWithEmailPassword } from '../../store/auth';
+import { checkFirebaseError } from '../../helpers/checkFirebaseError';
 
 
 const initialForm = {
@@ -15,6 +15,7 @@ const initialForm = {
 export const LoginPage = () => {
     
     const {status, errorMessage } = useSelector(state => state.auth);
+
     const dispatch = useDispatch();
     
     const { onInputChange, email, password, formState } = useForm(initialForm);
@@ -56,6 +57,10 @@ export const LoginPage = () => {
                     value={ password }
                     onChange={ onInputChange }
                 />
+
+                <div className="alert alert-danger p-2 text-start" role="alert" style={{display: `${!!errorMessage ? '': 'none'}`}}>
+                    <i className="bi bi-info-circle me-2"></i>{ checkFirebaseError(errorMessage) }
+                </div>
 
                 <button 
                     className="btn btn-primary"

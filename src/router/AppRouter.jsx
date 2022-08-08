@@ -3,6 +3,7 @@ import { SocialNetworkRoutes } from '../social_network/routes/SocialNetworkRoute
 import { AuthRoutes } from '../auth/routes/AuthRoutes';
 import { CheckingAuth } from '../ui/';
 import { useCheckAuth } from '../hooks/';
+import { UserProfilePage } from '../social_network/pages/';
 
 export const AppRouter = () => {
 
@@ -21,6 +22,7 @@ export const AppRouter = () => {
             }
 
             <Route path="/*" element={ <Navigate to='/auth/login' /> } />
+            <Route path="profile/:uid" element={<UserProfilePage />} />
         </Routes>
     )
 }

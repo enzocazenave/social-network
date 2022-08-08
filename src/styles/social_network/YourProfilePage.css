@@ -1,5 +1,5 @@
 .profile-container {
-    margin: 50px 300px;
+    margin: 80px 500px;
 }
 
 .profile-container__info {
@@ -52,7 +52,25 @@
     color: rgb(230, 230, 230);
 }
 
-.modal-backdrop
-{
+.modal-backdrop {
+    z-index: 1000;
     background-color: rgba(0,0,0,0.7);
+}
+
+.modal-custom-footer {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: normal;
+}
+
+.buttons-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+}
+
+.return-search-button {
+    display: block;
+    margin: 50px auto;
+    width: 20%;
 }

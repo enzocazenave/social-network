@@ -1,9 +1,11 @@
 import {setProfileImage} from '../auth/';
 import { fileUpload } from '../../helpers/fileUpload';
-import { FirebaseDB } from '../../firebase/config';
-import { doc, updateDoc } from 'firebase/firestore/lite';
+import { FirebaseDB, FirebaseRTDB } from '../../firebase/config';
+import { doc, updateDoc, collection, setDoc } from 'firebase/firestore/lite';
 import Swal from 'sweetalert2';
-import { setProfileInfo } from './social_networkSlice';
+import { setPosts, setProfileInfo } from './social_networkSlice';
+import { loadUserPosts } from '../../helpers/loadUserPosts';
+import { ref, set, get } from 'firebase/database';
 
 export const startUploadingProfileImage = (files = []) => {
     return async(dispatch, getState) => {
@@ -16,6 +18,8 @@ export const startUploadingProfileImage = (files = []) => {
         const docRef = doc(FirebaseDB, `${uid}/user_info`);
 
         await updateDoc(docRef, newImage, { merge: true });
+
+        dispatch(setDatabaseUserInfo())
 
         Swal.fire('Imagen subida', 'Tu foto de perfil fue actualizada.', 'success');
 
@@ -46,6 +50,7 @@ export const startUploadingNewInfo = (info = [], both) => {
             await updateDoc(docRef, newInfo, { merge: true });
         } else {
             const { birthdate } = getState().social_network;
+            
             dispatch(setProfileInfo({
                 birthdate: birthdate,
                 address: info.location,
@@ -58,5 +63,49 @@ export const startUploadingNewInfo = (info = [], both) => {
         }
 
         Swal.fire('Información actualizada', '', 'success');
+    }
+}
+
+export const startUploadingNewPost = (title, desc, files = []) => {
+    return async(dispatch, getState) => {
+        
+        const { uid } = getState().auth;
+        const userPosts = await loadUserPosts(uid);
+    
+        const fileUploadPromises = [];
+
+        for (const file of files) {
+            fileUploadPromises.push(fileUpload(file));
+        }
+
+        const photoUrls = await Promise.all(fileUploadPromises);
+
+        const newPost = {
+            title,
+            desc,
+            photoURL: photoUrls,
+            date: new Date().getTime()
+        }
+
+        const newDoc = doc(collection(FirebaseDB, `${uid}/user_posts/posts`));
+        await setDoc(newDoc, newPost);
+
+        newPost.id = newDoc.id;
+
+        userPosts.push(newPost);
+
+        dispatch(setPosts(userPosts));
+    
+        Swal.fire('Publicación subida', '', 'success');
+    }
+}
+
+export const setDatabaseUserInfo = () => {
+    return async(dispatch, getState) => {
+        const { uid, username, photoURL, name, surname } = getState().auth;
+
+        await set(ref(FirebaseRTDB, `users/${uid}`), {
+            username: username, photoURL: photoURL, name: `${name} ${surname}`
+        })
     }
 }

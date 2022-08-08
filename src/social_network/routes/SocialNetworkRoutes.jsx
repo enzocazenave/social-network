@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { FeedPage, YourProfilePage } from '../pages/';
+import { FeedPage, SearchedUsersPage, YourProfilePage } from '../pages/';
 
 export const SocialNetworkRoutes = () => {
     return (
@@ -7,6 +7,7 @@ export const SocialNetworkRoutes = () => {
             <Route path="/" element={ <FeedPage /> } />
             <Route path="/profile" element={ <YourProfilePage /> } /> 
             <Route path="/*" element={ <Navigate to="/" /> } />
+            <Route path="/search" element={ <SearchedUsersPage /> } />
         </Routes>
     )
 }

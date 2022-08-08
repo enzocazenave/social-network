@@ -1,0 +1,36 @@
+.post-account  {
+    width: 100%;
+    text-align: left;
+}
+
+.post-body {
+    width: 100%;
+    text-align: left;
+    border-left: 2px solid #000;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.container__small-photo {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin-right: 10px;
+    border: 1px solid #000
+}
+
+.container__published-text {
+    font-size: 12px;
+    color: rgb(44, 44, 44);
+    margin-top: 10px;
+}
+
+.post-body__image {
+    display: block;
+    width: 600px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}

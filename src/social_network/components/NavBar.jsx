@@ -1,21 +1,50 @@
 import { useDispatch } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import '../../styles/social_network/NavBar.css';
 import { startLogout } from '../../store/auth';
+import { useForm } from '../../hooks/useForm';
+import { getAllUsers } from '../../helpers/getAllUsers';
+import { setSearchedUsers } from '../../store/social_network';
+
+
+const initialForm = {
+    usernameToSearch: ''
+}
 
 export const NavBar = () => {
     
+    const {usernameToSearch, onInputChange } = useForm(initialForm);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const onLogout = () => {
         dispatch(startLogout());
     }
 
+    const onSearch = (e) => {
+        e.preventDefault();
+        
+        const normalizeUsername = usernameToSearch.toLowerCase().trim();
+        const resultUsers = [];
+
+        getAllUsers().then((users) => {
+
+            for (const user of users) {
+                if (user.username.includes(normalizeUsername)) {
+                    resultUsers.push(user);
+                }
+            }
+
+            dispatch(setSearchedUsers(resultUsers));
+            navigate('/search');
+        });
+    }
+
     return (
         <nav className="navbar-container">
-            <form className="navbar-container__form" role="search">
-                <input className="form-control" type="search" placeholder="Search" />
-                <button className="btn btn-secondary" type="submit"><i className="bi bi-search"></i></button>
+            <form onSubmit={ onSearch } className="navbar-container__form" role="search">
+                <input name="usernameToSearch" value={ usernameToSearch } onChange={ onInputChange } className="form-control" type="search" placeholder="Busca un usuario" />
+                <button onSubmit={ onSearch } className="btn btn-secondary" type="submit"><i className="bi bi-search"></i></button>
             </form>
 
             <div className="navbar-container__form">
@@ -23,7 +52,6 @@ export const NavBar = () => {
                 <RouterLink to="/profile"><i className="bi bi-person-circle fs-2 nav-icon"></i></RouterLink>
                 <RouterLink to="/profile"><i className="bi bi-sliders fs-2 nav-icon"></i></RouterLink>
             </div>
-               
             
             <button onClick={ onLogout } className="btn btn-success logout-button"><i className="bi bi-arrow-bar-left"></i>Cerrar sesión</button>
         </nav>
